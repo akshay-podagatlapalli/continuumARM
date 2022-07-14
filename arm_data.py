@@ -30,11 +30,12 @@ with mp_hands.Hands(
 
     if results.multi_hand_landmarks:
         for hand_landmarks in results.multi_hand_landmarks:
-            coordX = np.round(hand_landmarks.landmark[mp_hands.HandLandmark.WRIST].x, 3)
-            coordY = np.round(hand_landmarks.landmark[mp_hands.HandLandmark.WRIST].y, 3)
+            coordX = np.round(0.5 - hand_landmarks.landmark[mp_hands.HandLandmark.WRIST].x, 3)
+            coordY = np.round(0.5 - hand_landmarks.landmark[mp_hands.HandLandmark.WRIST].y, 3)
             coordZ = np.round(hand_landmarks.landmark[mp_hands.HandLandmark.WRIST].z, 3)
             
-            print(f'[{coordX}, {coordY}, {coordZ}]')
+            if coordX and coordY >= 0.25 or coordX and coordY <= -0.25:  
+                print(f'[{coordX}, {coordY}, {coordZ}]')
 
             mp_drawing.draw_landmarks(
                 image,
