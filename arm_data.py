@@ -1,10 +1,13 @@
 import cv2
 import mediapipe as mp
 import numpy as np
+import serial
 
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_hands = mp.solutions.hands
+
+ser = serial.Serial(port='COM3', baudrate=9600, timeout=.1)  
 
 cap = cv2.VideoCapture(0)
 with mp_hands.Hands(
@@ -34,8 +37,9 @@ with mp_hands.Hands(
             coordY = np.round(0.5 - hand_landmarks.landmark[mp_hands.HandLandmark.WRIST].y, 3)
             coordZ = np.round(hand_landmarks.landmark[mp_hands.HandLandmark.WRIST].z, 3)
             
-            if coordX >= 0.25 or coordX <= -0.25:  
-                print(f'[{coordX}, {coordY}, {coordZ}]')
+            #if coordX >= 0.25 or coordX <= -0.25:  
+            print(f'[{coordX}, {coordY}, {coordZ}]')
+            ser.write(f'{coordX},{coordY}\n'.encode())
 
             mp_drawing.draw_landmarks(
                 image,
@@ -47,4 +51,5 @@ with mp_hands.Hands(
     cv2.imshow('Hands', cv2.flip(image, 1))
     if cv2.waitKey(5) & 0xFF == 27:
       break
+ser.close()
 cap.release()
