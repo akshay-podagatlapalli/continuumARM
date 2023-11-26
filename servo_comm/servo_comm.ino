@@ -1,23 +1,29 @@
-#include<Servo.h>
-Servo s1;
-Servo s2;
-
-int pos = 0; // inital servo position 
+#include <Servo.h>
+Servo servoX;
+Servo servoY;
 
 void setup() {
-  s1.attach(9); // attaches the servo to pin 9
-  Serial.begin(9600); // setup serial communication
-}
+  Serial.begin(9600);  // Make sure the baud rate matches the Python script
+  servoX.attach(9);
+  servoY.attach(10);
+  }
 
 void loop() {
+  // Read data from the serial port
   if (Serial.available() > 0) {
     String data = Serial.readStringUntil('\n');
-    int coordX = data.substring(0, data.indexOf(',')).toInt();
+    int commaIndex = data.indexOf(',');
 
-    // Map the x-coordinate value to servo position
-    pos = map(coordX, -0.4, 0.4, 0, 180);
+    // Parse X and Y coordinates
+    int xCoordinate = data.substring(0, commaIndex).toInt();
+    int yCoordinate = data.substring(commaIndex + 1).toInt();
 
-    // Move the servo
-    s1.write(pos);
-  }  
+    // Map coordinates to servo angles (assuming servoMin and servoMax are your servo limits)
+    int xAngle = map(xCoordinate, -400, 400, 0, 180);
+    int yAngle = map(yCoordinate, -400, 400, 0, 180);
+
+    // Control your servos with xAngle and yAngle values
+    servoX.write(xAngle);
+    servoY.write(yAngle);
+  }
 }
