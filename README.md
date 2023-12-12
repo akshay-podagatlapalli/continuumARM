@@ -3,6 +3,9 @@
 
 This project consists of two main components: a Python script for tracking hand position using a webcam and a corresponding Arduino script for controlling servo motors based on the detected hand position.
 
+[![Alt text for your video](image-url)](https://youtu.be/-WNVujpI34I "TEST")
+
+
 ## Python Script
 
 The Python script uses OpenCV and MediaPipe to capture and process webcam video data to track the position of a hand. The script calculates the wrist's coordinates and sends this data through a serial port.
