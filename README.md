@@ -1,7 +1,7 @@
 # Hand Position Tracking and Servo Control System
 ## Overview
 
-This project consists of two main components: a Python script for tracking hand position using a webcam and a corresponding Arduino script for controlling servo motors based on the detected hand position.
+This project consists of two main components: python source code for tracking hand position using a webcam and a corresponding Arduino source code for controlling servo motors based on the detected hand position.
 
 
 
@@ -11,13 +11,13 @@ https://github.com/akshay-podagatlapalli/continuumARM/assets/65557678/802acbb3-9
 
 
 
-## Python Script
+## Python
 
-The Python script uses OpenCV and MediaPipe to capture and process webcam video data to track the position of a hand. The script calculates the wrist's coordinates and sends this data through a serial port.
+The Python source code uses the OpenCV and MediaPipe libraries to capture and process webcam video data to track the position of a hand. The code calculates the palm's coordinates and sends this data through a serial port.
 
 ## Arduino Script
 
-The Arduino script receives the coordinate data from the Python script and uses it to control two servo motors, mapping the hand's position to the servos' movements.
+The Arduino code receives the coordinate data from the Python script and uses it to control two servo motors, mapping the hand's position to the servos' movements.
 
 ## Requirements
 
